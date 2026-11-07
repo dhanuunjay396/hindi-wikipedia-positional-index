@@ -1,95 +1,62 @@
-PART A — 10 rare Hindi terms from the indexed Wikipedia corpus
-Corpus: 10000 documents; vocabulary: 222126 terms.
+Hindi Wikipedia positional index report
+Corpus: 10,000 documents; vocabulary: 223,053 terms.
 
-Rare Term: अँकुराई
-CF: 1
-DF: 1
-Postings:
-- Document 14234 → [752]
+Rare Hindi terms (CF, DF, and saved positions):
 
-Rare Term: अँखियो
-CF: 1
-DF: 1
-Postings:
-- Document 8249 → [3635]
+ँ — CF 1, DF 1
+  19433: [166]
 
-Rare Term: अँखुआ
-CF: 1
-DF: 1
-Postings:
-- Document 9099 → [321]
+ँद — CF 1, DF 1
+  7604: [177]
 
-Rare Term: अँग
-CF: 1
-DF: 1
-Postings:
-- Document 14843 → [35]
+ंएदितेर्रनेअन — CF 1, DF 1
+  4207: [2532]
 
-Rare Term: अँगड़ा
-CF: 1
-DF: 1
-Postings:
-- Document 17725 → [1162]
+ंग्रेज़ी — CF 1, DF 1
+  9282: [222]
 
-Rare Term: अँगड़ाई
-CF: 1
-DF: 1
-Postings:
-- Document 17725 → [1020]
+ंटग — CF 1, DF 1
+  14345: [2215]
 
-Rare Term: अँगरखा
-CF: 1
-DF: 1
-Postings:
-- Document 7731 → [498]
+ंड — CF 1, DF 1
+  8043: [217]
 
-Rare Term: अँगरेज़ी
-CF: 1
-DF: 1
-Postings:
-- Document 5784 → [725]
+ंमनिनगर — CF 1, DF 1
+  26261: [47]
 
-Rare Term: अँगीठियों
-CF: 1
-DF: 1
-Postings:
-- Document 9804 → [1859]
+ंस — CF 1, DF 1
+  899: [909]
 
-Rare Term: अँगुलिनुमा
-CF: 1
-DF: 1
-Postings:
-- Document 8761 → [1938]
+ःआआःआःआःआःआःआःआः — CF 1, DF 1
+  15914: [52]
+
+ःआआःआःआःआःआःआःआःआःआ — CF 1, DF 1
+  15914: [71]
 
 
-PART B — Five reproducible search test cases
+Search examples:
 
-Test 1: Single-term positional retrieval
+1. Single term
 Query: भारत
-Expected behavior: Return CF=14036, DF=3481 and positional postings.
-Actual output: CF=14036, DF=3481; first postings: [('54', [2, 76, 146, 186, 220, 234, 255, 301, 346, 374, 387, 455, 463, 683, 704, 931, 948, 1234, 1302, 1310, 1442, 1452, 1457, 1508, 1565, 1598, 1602, 1640, 1654, 2961, 2967, 3004, 3036, 3094, 3102, 3112, 3143, 3153, 3248, 3337, 3340, 3519, 3582, 3651, 3992, 4026, 4049, 4081, 4281, 4565, 4840, 4861, 4882, 4891, 4909]), ('56', [21, 481, 527]), ('58', [471, 604, 874, 946, 1396, 2743, 2753, 2914, 2957, 3027, 3040, 3064, 3540, 3590, 4124, 4374])]
+Result: 3485 matching documents
 Status: PASS
 
-Test 2: Repeated-term positional retrieval
-Query: अँड
-Expected behavior: At least one document must expose multiple ascending positions for the same term.
-Actual output: Document 6175 → [5673, 7058]
+2. Boolean AND
+Query: भारत AND नेपाल
+Result: 229 matching documents
 Status: PASS
 
-Test 3: Two-word exact phrase
-Query: "हम होंगे"
-Expected behavior: Return only documents containing the two terms at adjacent original-token positions.
-Actual output: 2 result(s); first IDs: ['10', '5009']
+3. Boolean OR
+Query: भारत OR नेपाल
+Result: 3635 matching documents
 Status: PASS
 
-Test 4: Boolean AND / OR
-Query: भारत AND नेपाल; भारत OR नेपाल
-Expected behavior: AND returns the intersection; OR returns the union.
-Actual output: AND 228 IDs: ['10095', '10163', '10177', '10371', '10636', '10701', '10906', '10910', '10912', '10918']; OR 3632 IDs: ['10034', '10035', '10036', '10039', '10041', '10043', '10046', '10072', '10092', '10095']
+4. Boolean NOT
+Query: भारत NOT नेपाल
+Result: 3256 matching documents
 Status: PASS
 
-Test 5: Rare-term retrieval with positions
-Query: अँकुराई
-Expected behavior: Return CF=1, DF=1 and the exact postings.
-Actual output: CF=1, DF=1; [('14234', [752])]
+5. Exact phrase
+Query: "भारत की राजधानी"
+Result: adjacent positions checked
 Status: PASS
